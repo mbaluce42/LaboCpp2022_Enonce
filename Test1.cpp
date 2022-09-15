@@ -1,6 +1,8 @@
 #include <iostream>
+#include <cstring>
+#include <string>
 using namespace std;
-#include "Modele.h"
+//#include "Modele.h"
 
 // Quelques conseils avant de commencer...
 // * N'oubliez pas de tracer (cout << ...) tous les constructeurs et le destructeur !!! Ca, c'est pas un conseil,
@@ -13,6 +15,85 @@ using namespace std;
 // * Une fois que tout le programme compile et fonctionne correctement, creez le .h contenant la declaration
 //   de la classe, le .cpp contenant la definition des methodes, et ensuite le makefile permettant de compiler
 //   le tout grace a la commande make 
+enum Moteur { Essence, Diesel, Electrique, Hybride };
+class Modele
+{
+private:
+        char* nom;
+        int puissance;
+        Moteur moteur;
+        float prixDeBasse;
+public:
+        Modele()//constructeur par defaut
+        {
+          nom= new char [100];
+          strcpy(nom,"");
+          puissance=90;
+          moteur= Essence;
+          prixDeBasse=445.97;
+          cout << "Je suis le contructeur par defaut" << endl;
+
+      /*
+          void setNom(char* n)
+          {
+            strcpy(nom,n);
+          }
+
+          void setMoteur(int m)
+          {
+
+            if( m==Essence)
+            {
+              moteur=m;
+            }
+            else if(m==Diesel)
+            {
+              moteur=m;
+            }
+            else if(m== Electrique)
+            {
+              moteur=m;
+            }
+            else if (m==Hybride )
+            {
+              moteur=m;
+            }
+
+          }
+
+          void setPuissance(int p)
+          {
+            if(p>0)
+            {
+              puissance=p;
+            }
+          }
+
+      */
+          
+
+          
+        }
+        ~Modele()//destructeur
+          {
+            delete nom;
+          }
+
+          void Affiche(void)
+          {
+            cout << "Modele: " <<endl;
+            cout << "Nom: " <<nom<<endl;
+            cout << "Puissance: " <<puissance<<endl;
+            cout << "Moteur: " <<moteur<<endl;
+            cout << "Prix de base: " <<prixDeBasse<<endl;
+          }
+
+};
+
+  
+
+
+
 
 int main()
 {
@@ -22,6 +103,7 @@ int main()
     modele.Affiche();
   } // La presence des accolades assure que le destructeur de Modele sera appele --> a tracer !
 
+/*
   cout << endl << "(2) ***** Test des setters et getters ***********************************" << endl;
   {
     Modele modele;
@@ -83,7 +165,7 @@ int main()
     cout << "modele1 (APRES) :" << endl;
     modele1.Affiche();
   }
-
+*/
   return 0;
 }
 
