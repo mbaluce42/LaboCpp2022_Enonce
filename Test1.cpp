@@ -22,7 +22,7 @@ private:
         char* nom;
         int puissance;
         Moteur moteur;
-        float prixDeBasse;
+        float prixDeBase;
 public:
         Modele()//constructeur par defaut
         {
@@ -30,36 +30,78 @@ public:
           strcpy(nom,"");
           puissance=90;
           moteur= Essence;
-          prixDeBasse=445.97;
-          cout << "Je suis le contructeur par defaut" << endl;
+          prixDeBase=445.97;
+          cout << "Je suis le contructeur par defaut" << endl<<endl;
+        }
 
-      /*
-          void setNom(char* n)
+        /* contructeur d'initialisation | parametre*/
+        Modele(const char* name, int p, Moteur m,float prix)
+        {
+          nom= new char [100];
+          strcpy(nom,name);
+          puissance=p;
+          moteur=m;
+          prixDeBase=prix;
+
+          /*comme le contructeur par defaut sauf qu'il est parametre*/
+          cout << "Je suis le contructeur d'initialisation" << endl<<endl;
+        }
+
+        /*contructeur de copie*/
+        /*Syntaxe fonction--> nomClasse (const nomClasse & autre_objet); */
+        Modele(const Modele &modl)
+        {
+          nom= new char [100];
+          strcpy(nom,modl.nom);
+          puissance=modl.puissance;
+          moteur=modl.moteur;
+          prixDeBase=modl.prixDeBase;
+
+          cout << "Je suis le constructeur par copie " << endl<<endl;
+
+        }
+
+      
+          void setNom(const char* n)
           {
             strcpy(nom,n);
           }
 
-          void setMoteur(int m)
+          char* getNom()
+          {
+            return nom;
+          }
+          //-----------------------------
+          void setMoteur(Moteur m)
           {
 
-            if( m==Essence)
+            switch(m)
             {
+              case Essence:
+              moteur= m;
+              break;
+
+              case Diesel:
               moteur=m;
-            }
-            else if(m==Diesel)
-            {
+              break;
+
+              case Electrique:
               moteur=m;
-            }
-            else if(m== Electrique)
-            {
+              break;
+
+              case Hybride:
               moteur=m;
-            }
-            else if (m==Hybride )
-            {
-              moteur=m;
+              break;
             }
 
           }
+
+          int getMoteur()
+          {
+            return moteur;
+          }
+
+          //---------------------------------
 
           void setPuissance(int p)
           {
@@ -69,14 +111,32 @@ public:
             }
           }
 
-      */
-          
+          int getPuissance()
+          {
+            return puissance;
+          }
+          //---------------------------------------
+          void setPrixDeBase(float prix)
+          {
+            if(prix>0)
+            {
+              prixDeBase=prix;
+            }
+
+          }
+          float getPrixDeBase()
+          {
+            return prixDeBase;
+          }
+
+          //-----------------------------------------
 
           
-        }
         ~Modele()//destructeur
           {
-            delete nom;
+
+            delete[] nom;
+            cout << "Je suis le destructeur" << endl<<endl;
           }
 
           void Affiche(void)
@@ -85,13 +145,10 @@ public:
             cout << "Nom: " <<nom<<endl;
             cout << "Puissance: " <<puissance<<endl;
             cout << "Moteur: " <<moteur<<endl;
-            cout << "Prix de base: " <<prixDeBasse<<endl;
+            cout << "Prix de base: " <<prixDeBase<<endl<<endl;
           }
 
 };
-
-  
-
 
 
 
@@ -103,7 +160,7 @@ int main()
     modele.Affiche();
   } // La presence des accolades assure que le destructeur de Modele sera appele --> a tracer !
 
-/*
+
   cout << endl << "(2) ***** Test des setters et getters ***********************************" << endl;
   {
     Modele modele;
@@ -165,7 +222,7 @@ int main()
     cout << "modele1 (APRES) :" << endl;
     modele1.Affiche();
   }
-*/
+
   return 0;
 }
 
