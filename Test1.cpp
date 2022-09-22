@@ -2,7 +2,7 @@
 #include <cstring>
 #include <string>
 using namespace std;
-//#include "Modele.h"
+#include "Modele.h"
 
 // Quelques conseils avant de commencer...
 // * N'oubliez pas de tracer (cout << ...) tous les constructeurs et le destructeur !!! Ca, c'est pas un conseil,
@@ -15,140 +15,6 @@ using namespace std;
 // * Une fois que tout le programme compile et fonctionne correctement, creez le .h contenant la declaration
 //   de la classe, le .cpp contenant la definition des methodes, et ensuite le makefile permettant de compiler
 //   le tout grace a la commande make 
-enum Moteur { Essence, Diesel, Electrique, Hybride };
-class Modele
-{
-private:
-        char* nom;
-        int puissance;
-        Moteur moteur;
-        float prixDeBase;
-public:
-        Modele()//constructeur par defaut
-        {
-          nom= new char [100];
-          strcpy(nom,"");
-          puissance=90;
-          moteur= Essence;
-          prixDeBase=445.97;
-          cout << "Je suis le contructeur par defaut" << endl<<endl;
-        }
-
-        /* contructeur d'initialisation | parametre*/
-        Modele(const char* name, int p, Moteur m,float prix)
-        {
-          nom= new char [100];
-          strcpy(nom,name);
-          puissance=p;
-          moteur=m;
-          prixDeBase=prix;
-
-          /*comme le contructeur par defaut sauf qu'il est parametre*/
-          cout << "Je suis le contructeur d'initialisation" << endl<<endl;
-        }
-
-        /*contructeur de copie*/
-        /*Syntaxe fonction--> nomClasse (const nomClasse & autre_objet); */
-        Modele(const Modele &modl)
-        {
-          nom= new char [100];
-          strcpy(nom,modl.nom);
-          puissance=modl.puissance;
-          moteur=modl.moteur;
-          prixDeBase=modl.prixDeBase;
-
-          cout << "Je suis le constructeur par copie " << endl<<endl;
-
-        }
-
-      
-          void setNom(const char* n)
-          {
-            strcpy(nom,n);
-          }
-
-          char* getNom()
-          {
-            return nom;
-          }
-          //-----------------------------
-          void setMoteur(Moteur m)
-          {
-
-            switch(m)
-            {
-              case Essence:
-              moteur= m;
-              break;
-
-              case Diesel:
-              moteur=m;
-              break;
-
-              case Electrique:
-              moteur=m;
-              break;
-
-              case Hybride:
-              moteur=m;
-              break;
-            }
-
-          }
-
-          int getMoteur()
-          {
-            return moteur;
-          }
-
-          //---------------------------------
-
-          void setPuissance(int p)
-          {
-            if(p>0)
-            {
-              puissance=p;
-            }
-          }
-
-          int getPuissance()
-          {
-            return puissance;
-          }
-          //---------------------------------------
-          void setPrixDeBase(float prix)
-          {
-            if(prix>0)
-            {
-              prixDeBase=prix;
-            }
-
-          }
-          float getPrixDeBase()
-          {
-            return prixDeBase;
-          }
-
-          //-----------------------------------------
-
-          
-        ~Modele()//destructeur
-          {
-
-            delete[] nom;
-            cout << "Je suis le destructeur" << endl<<endl;
-          }
-
-          void Affiche(void)
-          {
-            cout << "Modele: " <<endl;
-            cout << "Nom: " <<nom<<endl;
-            cout << "Puissance: " <<puissance<<endl;
-            cout << "Moteur: " <<moteur<<endl;
-            cout << "Prix de base: " <<prixDeBase<<endl<<endl;
-          }
-
-};
 
 
 
