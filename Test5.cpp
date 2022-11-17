@@ -69,7 +69,7 @@ void Essai1()
   // A COMPLETER : Traitez l'exception susceptible d'etre lancee par le bloc de code suivant (try...catch)
   // en particulier : afficher le message de l'exception lancee
 
-  // ...
+  try
   {
     cout << "----- 1.1 Test des setters la classe Option -----------------------------------" << endl;
     Option o1;
@@ -107,7 +107,10 @@ void Essai1()
     cout << "Nouvelle ristourne de 50 euros sur la derniere option encodee..." << endl;
     cout << "Voici l'option apres ristourne : " << --o2 << endl;  // !!!
   }
-  // ...
+  catch(OptionException oe)
+  {
+    cout << oe.getMessage() << endl ;
+  }
   
   cout << endl;
 }
@@ -119,7 +122,7 @@ void Essai2()
   // A COMPLETER : Traitez l'exception susceptible d'etre lancee par le bloc de code suivant (try...catch)
   // en particulier : afficher le message de l'exception lancee
 
-  // ...
+  try
   {
     cout << "----- 2.1 Creation d'une voiture sans options -----------------------------------" << endl;
     Voiture v1("Projet_208_MrDugenou",Modele("208 Access 1.0",68,Essence,12500.0f));
@@ -158,7 +161,10 @@ void Essai2()
     cout << "----- 2.4 La voiture apres le retrait de l'option -------------------------------" << endl;
     cout << v1 << endl;
   }
-  // ...
+  catch(OptionException oe)
+  {
+    cout << oe.getMessage() << endl ;
+  }
   
   cout << endl;
 }
@@ -170,7 +176,7 @@ void Essai3()
   // A COMPLETER : Traitez l'exception susceptible d'etre lancee par le bloc de code suivant (try...catch)
   // en particulier : Tester le code de l'erreur et affiche la cause exacte de l'erreur.
 
-  // ...
+  try
   {
     Employe e1("Dupont","Michel",2,"dupomich",Employe::ADMINISTRATIF);
     cout << e1 << endl << endl;
@@ -188,7 +194,12 @@ void Essai3()
     cout << "Affichage du mot de passe :" << endl;
     cout << "Mot de passe = " << e1.getMotDePasse() << endl;  // !!!
   }
-  // ...
+  catch(PasswordException PwdExc)
+  {
+    cout << PwdExc.getMessage() << endl ;
+    cout << "ERROR: "<< PwdExc.getPswExcpCode()<< endl;
+  }
+
   
   cout << endl;
 }
@@ -199,7 +210,7 @@ void Essai4()
   cout << "----- 4. Gestion de plusieurs exceptions simultanement ---" << endl;
   // A COMPLETER : Traitez TOUTES les exceptions susceptible d'etre lancee par le bloc de code suivant (try...catch)
 
-  // ...
+  try
   {
     Option o;
     cout << "Encodez une option : " << endl;
@@ -209,12 +220,23 @@ void Essai4()
     cout << e1 << endl;
     cout << "Encodez son mot de passe : ";
     string mdp;
+    cin.ignore();
     getline(cin,mdp);
     e1.setMotDePasse(mdp);
     cout << "Affichage du mot de passe :" << endl;
     cout << "Mot de passe = " << e1.getMotDePasse() << endl;
   }
-  // ...
+  catch(OptionException oe)
+  {
+    cout << oe.getMessage() << endl ;
+  }
+
+  catch(PasswordException PwdExc)
+
+  {
+    cout << PwdExc.getMessage() << endl ;
+    cout << "ERROR: "<<PwdExc.getPswExcpCode()<< endl;
+  }
   
   cout << endl;
 }

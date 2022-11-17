@@ -1,5 +1,4 @@
-#include <iostream>
-using namespace std;
+
 #include "Option.h"
 
 // Tests de la classe Option seule

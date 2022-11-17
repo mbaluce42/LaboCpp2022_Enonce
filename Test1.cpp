@@ -1,7 +1,4 @@
-#include <iostream>
-#include <cstring>
-#include <string>
-using namespace std;
+
 #include "Modele.h"
 
 // Quelques conseils avant de commencer...

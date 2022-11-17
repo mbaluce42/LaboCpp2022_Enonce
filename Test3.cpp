@@ -273,5 +273,6 @@ void Essai9()
     if (v[i] != NULL) cout << *(v[i]) << endl;
     else cout << "---" << endl;
   }
+
 }
 

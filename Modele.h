@@ -1,6 +1,11 @@
 #ifndef MODELE_H
 #define MODELE_H
 
+#include <iostream>
+#include <cstring>
+#include <string>
+using namespace std;
+
 enum Moteur { Essence, Diesel, Electrique, Hybride };
 
 class Modele
@@ -27,7 +32,7 @@ public:
         
           //-----------------------------
           void setMoteur(Moteur m);
-          int getMoteur()const;
+          Moteur getMoteur()const;
          
           //---------------------------------
 
@@ -43,6 +48,12 @@ public:
          ~Modele();//destructeur
 
          void Affiche(void)const;
+
+
+        friend ostream& operator<<(ostream& s, const Modele& mod);
+
+        friend istream& operator>>(istream& s, Modele& mod);
+
 };
 #endif
 

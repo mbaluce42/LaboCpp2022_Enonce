@@ -1,9 +1,6 @@
 #include "Modele.h"
+//#define DEBUG
 
-#include <iostream>
-#include <cstring>
-#include <string>
-using namespace std;
 
 
 Modele::Modele()//constructeur par defaut
@@ -16,7 +13,9 @@ Modele::Modele()//constructeur par defaut
   setMoteur(moteur);
   setPrixDeBase(prixDeBase);
   //prixDeBase=445.97;
-  cout << "Je suis le contructeur par defaut" << endl<<endl;
+  #ifdef DEBUG
+  cout << "Je suis le contructeur par defaut MODELE" << endl<<endl;
+  #endif
 }
 
 /* contructeur d'initialisation | parametre*/
@@ -28,8 +27,10 @@ Modele::Modele(const char* name, int p, Moteur m,float prix)
   setMoteur(m);
   setPrixDeBase(prix);
 
+  #ifdef DEBUG
   /*comme le contructeur par defaut sauf qu'il est parametre*/
-  cout << "Je suis le contructeur d'initialisation" << endl<<endl;
+  cout << "Je suis le contructeur d'initialisation MODELE" << endl<<endl;
+  #endif
 }
 
 /*contructeur de copie*/
@@ -39,25 +40,30 @@ Modele::Modele(const Modele &modl)
   nom= NULL;
   setNom(modl.nom);
   setPuissance(modl.puissance);
-  //moteur=modl.moteur;
-  //prixDeBase=modl.prixDeBase;
   setMoteur(modl.moteur);
-  setPrixDeBase(prixDeBase);
+  setPrixDeBase(modl.prixDeBase);
 
-   cout << "Je suis le constructeur par copie " << endl<<endl;
+  #ifdef DEBUG
+   cout << "Je suis le constructeur par copie MODELE " << endl<<endl;
+   #endif
 }
 
 
 Modele::~Modele()//destructeur
 {
+	if(nom !=NULL)
+	{
+		delete[] nom;
+		#ifdef DEBUG
+  		cout << "Je suis le destructeur MODELE" << endl<<endl;
+  		#endif
 
-  delete[] nom;
-  cout << "Je suis le destructeur" << endl<<endl;
+	}
 }
 
-void Modele::Affiche (void)const
+void Modele::Affiche(void)const
 {
-  cout << "Modele: " <<endl;
+  cout << "\nModele: " <<endl;
   cout << "Nom: " <<nom<<endl;
   cout << "Puissance: " <<puissance<<endl;
   cout << "Moteur: " <<moteur<<endl;
@@ -84,7 +90,7 @@ void Modele::setMoteur(Moteur m)
  	moteur= m;
 }
 
-int Modele::getMoteur()const
+Moteur Modele::getMoteur()const
 {
   return moteur;
 }
@@ -116,4 +122,102 @@ void Modele::setPrixDeBase(float prix)
 float Modele::getPrixDeBase ()const
 {
  return prixDeBase;
+}
+
+
+ostream& operator<<(ostream& s, const Modele& mod)
+{
+  s<<"Modele: "<<endl;
+  s<<"Nom: "<<mod.nom<< endl;
+  s<< "Puissance "<<mod.puissance<<endl;
+
+  switch(mod.moteur)
+  {
+    case 0:
+    s<<"Moteur: Essence"<< endl;
+    break;
+
+    case 1:
+    s<<"Moteur: Diesel"<<endl;
+    break;
+
+    case 2:
+    s<<"Moteur: Electrique"<<endl;
+    break;
+
+
+    case 3:
+    s<<"Moteur: Hybride"<<endl;
+    break;
+  }
+  s<<"Prix de Basse: "<<mod.prixDeBase<<endl;
+
+  return s;
+}
+
+
+
+istream& operator>>(istream& s, Modele& mod)
+{
+  int checkMoteur=0;
+  Modele CopieMod;
+  int err=0;
+  cout<<"Saisissez les infos d'un Modele: "<<endl;
+  cout<<"Nom: ";
+  
+  s.getline(CopieMod.nom,25);//istream& getline(char*, int size,/*char='\n*/)
+  //s>>CopieMod.nom;
+
+  cout<< endl <<"Puissance: ";
+  s>>CopieMod.puissance;
+
+    cout<<endl <<"Moteur (0==Essence || 1==Diesel || 2==Electrique || 3==Hybride) :";
+    fflush(stdin);
+    s>>checkMoteur;
+
+    switch(checkMoteur)
+    {
+      case 0:
+      cout<<"Moteur==Essence"<< endl ;
+      err=0;
+      break;
+
+      case 1:
+      cout<<"Moteur== Diesel"<< endl;
+      err=0;
+      break;
+
+      case 2:
+      cout<<"Moteur== Electrique"<< endl;
+      err=0;
+      break;
+
+
+      case 3:
+      cout<<"Moteur== Hybride"<<endl;
+      err=0;
+      break;
+
+      default:
+      err=-1;
+      cout<<endl <<"!!! ERREUR !!! AUCUN MOTEUR ASSOCIER AU NUM ENTREE"<<endl;
+      break;
+    }
+
+  CopieMod.moteur=(Moteur)checkMoteur;
+
+
+  cout<<endl <<"Prix de Basse: ";
+  s>>CopieMod.prixDeBase;
+
+
+  mod.setNom(CopieMod.getNom());
+  mod.setPuissance(CopieMod.getPuissance());
+  mod.setMoteur(CopieMod.getMoteur());
+  mod.setPrixDeBase(CopieMod.getPrixDeBase());
+
+
+  return s;
+
+
 }

@@ -1,5 +1,4 @@
-#include <iostream>
-using namespace std;
+
 #include "Modele.h"
 #include "Voiture.h"
 
@@ -12,6 +11,7 @@ int main()
     Voiture voiture;
     voiture.Affiche();
   }
+  
 
   cout << endl << "(2) ***** Test des setters/getters *************************************************" << endl;
   {
@@ -25,6 +25,7 @@ int main()
     v.getModele().Affiche();
   }
 
+
   cout << endl << "(3) ***** Test du constructeur d'initialisation de Voiture *************************" << endl;
   {
     Voiture v("Projet_508SW_MmeLoreille",Modele("508SW Style 1.6 HDi",115,Diesel,28500.0f));
@@ -33,6 +34,7 @@ int main()
     cout << "Modele du projet : ";
     v.getModele().Affiche();
   }
+
 
   cout << endl << "(4) ***** Test du constructeur de copie de Voiture *********************************" << endl;
   {
