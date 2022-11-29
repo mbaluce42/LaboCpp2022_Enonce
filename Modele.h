@@ -4,6 +4,9 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <iostream>
+#include <fstream>
+
 using namespace std;
 
 enum Moteur { Essence, Diesel, Electrique, Hybride };
@@ -53,6 +56,9 @@ public:
         friend ostream& operator<<(ostream& s, const Modele& mod);
 
         friend istream& operator>>(istream& s, Modele& mod);
+
+        void Save(ofstream& fichier)const;
+        void Load(ifstream& fichier);
 
 };
 #endif

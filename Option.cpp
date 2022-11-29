@@ -166,7 +166,63 @@ Option Option::operator--(int)//post-incrementation ex: D++
 }
 
 
+void Option::Save(ofstream& fichier)const
+{
+  if(!fichier)
+  {
+    cout<<"!!! ERREUR D'OUVERTURE FICHIER Option!!!"<<endl;
+  }
 
+  else
+  {
+    int taille= code.size();
+    fichier.write((char *)&taille,sizeof(int));
+    fichier.write((char *)code.data(),taille*sizeof(char));
+
+
+    taille=intitule.size();
+    fichier.write((char *)&taille,sizeof(int));
+    fichier.write((char *)intitule.data(),taille*sizeof(char));
+
+    fichier.write((char *)&prix,sizeof(float));
+    cout<< ">>>Option : Save <<<"<<endl;
+
+  }
+
+
+  
+}
+
+void Option::Load(ifstream& fichier)
+{
+  if(!fichier)
+  {
+    cout<<"!!! ERREUR D'OUVERTURE FICHIER Option!!!"<<endl;
+  }
+
+  else
+  {
+    
+    int t;
+
+    fichier.read((char *)&t, sizeof(int));
+    code.resize(t);
+    fichier.read((char *)code.data(), t*sizeof(char));
+    
+
+    fichier.read((char *)&t, sizeof(int));
+    intitule.resize(t);
+    fichier.read((char *)intitule.data(), t*sizeof(char));
+
+    fichier.read((char *)&prix, sizeof(float));
+
+    cout<< ">>>Option : Load <<<"<<endl;
+  
+
+  }
+
+
+}
 
 
 

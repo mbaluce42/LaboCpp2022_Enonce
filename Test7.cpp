@@ -6,6 +6,7 @@ using namespace std;
 #include "Option.h"
 #include "Voiture.h"
 
+
 int  Menu();
 void Essai1();
 void Essai2();
@@ -99,6 +100,8 @@ void Essai2()  // Attention : utilisez les flux bytes (read et write) !!!!
 /*********************************************************************************************/
 void Essai3()  // Attention : utilisez les flux bytes (read et write) !!!!
 {
+  
+
   cout << "----- 3. Test des methodes Save et Load de la classe Voiture ------" << endl;
 
   Voiture voiture("Projet_208_MrLagalere",Modele("208 Access 1.0",68,Essence,12500.0f));
@@ -119,4 +122,5 @@ void Essai3()  // Attention : utilisez les flux bytes (read et write) !!!!
   cout << "Prix du projet : " << voiture2.getPrix() << " euros" << endl << endl;
 
   cout << endl;
+  
 }

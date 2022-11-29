@@ -26,7 +26,7 @@ public:
 	Employe();
 
 	/* contructeur d'initialisation | parametre*/
-	Employe(const string n, const string pren,const int num,const string l,const string fct);
+	Employe(const string n, const string pren/*,const int num*/,const string l,const string fct);
 
 	/*Constructeur de copie*/
 	Employe(const Employe &empl);

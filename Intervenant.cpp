@@ -1,7 +1,7 @@
 #include "Intervenant.h"
 #define DEBUG
 
-
+int Intervenant::numCourant=1;
 /*constructeur par defaut*/
 	Intervenant::Intervenant()
 	{
@@ -12,9 +12,10 @@
 	}
 
 	/* contructeur d'initialisation | parametre*/
-	Intervenant::Intervenant(const string n, const string pren,const int num) : Personne(n,pren)
+	Intervenant::Intervenant(const string n, const string pren/*,const int num*/) : Personne(n,pren)
 	{
-		setNumero(num);
+		setNumero(numCourant);
+		numCourant++;
 		#ifdef DEBUG
   		cout << "Je suis le contructeur d'initialisation Intervenant" << endl<<endl;
   		#endif
@@ -24,7 +25,7 @@
 	/*Constructeur de copie*/
 	Intervenant::Intervenant(const Intervenant& i) : Personne(i)
 	{
-		setNumero(i.getNumero());
+		setNumero(/*i.getNumero()*/numCourant);
 		#ifdef DEBUG
   		cout << "Je suis le contructeur de copie Intervenant" << endl<<endl;
   		#endif

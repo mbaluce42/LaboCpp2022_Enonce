@@ -1,5 +1,5 @@
 #include "Modele.h"
-//#define DEBUG
+#define DEBUG
 
 
 
@@ -160,16 +160,16 @@ ostream& operator<<(ostream& s, const Modele& mod)
 istream& operator>>(istream& s, Modele& mod)
 {
   int checkMoteur=0;
-  Modele CopieMod;
   int err=0;
   cout<<"Saisissez les infos d'un Modele: "<<endl;
   cout<<"Nom: ";
   
-  s.getline(CopieMod.nom,25);//istream& getline(char*, int size,/*char='\n*/)
-  //s>>CopieMod.nom;
+  s.getline(mod.nom,25);//istream& getline(char*, int size,/*char='\n*/)
+  mod.setNom(mod.getNom());
 
   cout<< endl <<"Puissance: ";
-  s>>CopieMod.puissance;
+  s>>mod.puissance;
+  mod.setPuissance(mod.getPuissance());
 
     cout<<endl <<"Moteur (0==Essence || 1==Diesel || 2==Electrique || 3==Hybride) :";
     fflush(stdin);
@@ -204,20 +204,65 @@ istream& operator>>(istream& s, Modele& mod)
       break;
     }
 
-  CopieMod.moteur=(Moteur)checkMoteur;
+  mod.moteur=(Moteur)checkMoteur;
+  mod.setMoteur(mod.getMoteur());
 
 
   cout<<endl <<"Prix de Basse: ";
-  s>>CopieMod.prixDeBase;
-
-
-  mod.setNom(CopieMod.getNom());
-  mod.setPuissance(CopieMod.getPuissance());
-  mod.setMoteur(CopieMod.getMoteur());
-  mod.setPrixDeBase(CopieMod.getPrixDeBase());
-
+  s>>mod.prixDeBase;
+  mod.setPrixDeBase(mod.getPrixDeBase());
 
   return s;
+
+
+}
+
+
+
+void Modele::Save(ofstream& fichier)const
+{
+  if(!fichier)
+  {
+    cout<<"!!! ERREUR D'OUVERTURE FICHIER Modele!!!"<<endl;
+  }
+
+  else
+  {
+    int taille= strlen(nom);
+    fichier.write((char *)&taille,sizeof(int));
+    fichier.write((char *)nom,taille*sizeof(char));
+
+    fichier.write((char *)&puissance,sizeof(int));
+    fichier.write((char *)&moteur,sizeof(Moteur));
+    fichier.write((char *)&prixDeBase,sizeof(float));
+    cout<< ">>>Modele : Save <<<"<<endl;
+  }
+
+
+  
+}
+
+void Modele::Load(ifstream& fichier)
+{
+  if(!fichier)
+  {
+    cout<<"!!! ERREUR D'OUVERTURE FICHIER Modele!!!"<<endl;
+  }
+
+  else
+  {
+    int t;
+
+    fichier.read((char *)&t, sizeof(int));
+    nom= new char[t+1];
+    fichier.read((char *)nom, t*sizeof(char));
+    
+    fichier.read((char *)&puissance,sizeof(int));
+    fichier.read((char *)&moteur,sizeof(Moteur));
+    fichier.read((char *)&prixDeBase,sizeof(float));
+    cout<< ">>>Modele : Load <<<"<<endl;
+
+  }
 
 
 }

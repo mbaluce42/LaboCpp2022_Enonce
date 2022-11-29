@@ -1,7 +1,7 @@
 #include "Modele.h"
 #include "Voiture.h"
 #include "Option.h"
-//#define DEBUG
+#define DEBUG
 
 
 
@@ -137,28 +137,6 @@ for(i=0;i<5 ;i++)
   {
     throw OptionException("!!! Plus de place dans l'options (MAX 5) !!!");
   }
-/*
-  else if(i>=1)//si i est au moin egal a 1 c a dire si il y a au moin 2 option 
-  {
-    int max =i;
-    tmpOption=option[0];
-
-    for(int tmp1=0;tmp1<=max-1 ;tmp1++)
-    {
-      for(int tmp2=1;tmp2<=max ;tmp2++)
-      {
-        
-        if(tmpOption[tmp1].getCode() == tmpOption[tmp2].getCode())
-        {
-          RetireOption(option[tmp2]->getCode());
-          throw OptionException("!!! Code de l'option deja existant !!!");
-          
-        }
-
-      }
-
-    }
-  }*/
   
           
 }
@@ -357,6 +335,99 @@ istream& operator>>(istream& s, Voiture& voit)
 Option* Voiture::operator[](int i)
 {
   return (*this).option[i];
+}
+
+
+void Voiture::Save()const
+{
+  string namefile= nom +".car";
+  ofstream f (namefile, ios::out | ios::binary);
+
+  if(!f)
+  {
+    cout<<"!!! ERREUR D'OUVERTURE FICHIER Voiture!!!"<<endl;
+  }
+
+  else
+  {
+    
+    int taille= nom.size();
+    f.write((char *)&taille,sizeof(int));
+    f.write((char *)nom.data(),taille*sizeof(char));
+
+    modele.Save(f);
+
+    taille=0;
+
+    for(int i=0; i<5;i++)
+    {
+      if(option[i] != NULL)
+      {
+        taille++;
+      }
+      
+    }
+
+    f.write((char *)&taille,sizeof(int));
+
+    for(int i=0; i<5;i++)
+    {
+      if(option[i] != NULL)
+      {
+        option[i]->Save(f);
+      }
+      
+    }
+
+    cout<< ">>>Voiture: Save <<<"<<endl;
+
+    
+
+  }
+
+  f.close();
+
+  
+}
+
+void Voiture::Load(string nomFichier)
+{
+  ifstream f (nomFichier, ios::in | ios::binary);
+
+  if(!f)
+  {
+    cout<<"!!! ERREUR D'OUVERTURE FICHIER "<<nomFichier <<"!!!"<<endl;
+  }
+
+  else
+  {
+    int t;
+
+    f.read((char *)&t, sizeof(int));
+    nom.resize(t);
+    f.read((char *)nom.data(), t*sizeof(char));
+
+    modele.Load(f);
+
+    Option temp[5];
+
+    
+    f.read((char *)&t, sizeof(int));
+      for(int i=0; i<t;i++)
+      {
+  
+        temp[i].Load(f);
+        AjouteOption(temp[i]);
+      }
+
+
+    cout<< ">>>Voiture: Load <<<"<<endl;
+
+  }
+
+  f.close();
+
+
 }
 
 

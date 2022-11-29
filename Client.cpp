@@ -12,7 +12,7 @@ Client::Client()
 }
 
 /* contructeur d'initialisation | parametre*/
-Client::Client(const string n, const string pren,const int num,const string phone) : Intervenant(n,pren,num)
+Client::Client(const string n, const string pren/*,const int num*/,const string phone) : Intervenant(n,pren/*,num*/)
 {
 	setGsm(phone);
 	#ifdef DEBUG

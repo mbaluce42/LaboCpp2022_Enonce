@@ -24,7 +24,7 @@ Employe::Employe()
 	}
 
 	/* contructeur d'initialisation | parametre*/
-Employe::Employe(const string n, const string pren,const int num,const string l,const string fct) : Intervenant(n,pren,num)
+Employe::Employe(const string n, const string pren/*,const int num*/,const string l,const string fct) : Intervenant(n,pren/*,num*/)
 {
 	motDePasse=NULL;
 	setLogin(l);
@@ -118,6 +118,8 @@ void Employe::setMotDePasse(const string mdp)
 		}
 		i++;
 	}
+
+	
 
   if(chiffre==0)
   {

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <iostream>
+#include <fstream>
 #include "OptionException.h"
 using namespace std;
 
@@ -45,6 +47,9 @@ public:
 	Option operator--();//pre-incrementation ex: ++D
 
 	Option operator--(int);//post-incrementation ex: D++
+
+	void Save(ofstream& fichier)const;
+	void Load(ifstream& fichier);
 
 };
 #endif

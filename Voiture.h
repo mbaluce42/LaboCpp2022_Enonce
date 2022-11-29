@@ -65,6 +65,9 @@ public:
 
         Option *operator[](int i);
 
+        void Save()const;
+        void Load(string nomFichier);
+
 
 
 };

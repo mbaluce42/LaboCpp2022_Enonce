@@ -1,5 +1,5 @@
 
-PROGAMS = Test1 Test2a Test2b Test2c Test3 Test4 Test5
+PROGAMS = Test1 Test2a Test2b Test2c Test3 Test4 Test5 Test6 Test7 Test8a
 
 all: $(PROGAMS)
 
@@ -24,6 +24,15 @@ Test4:	Test4.cpp Personne.o Client.o Intervenant.o Employe.o
 
 Test5: Test5.cpp Voiture.o Modele.o Option.o Personne.o Client.o Intervenant.o Employe.o Exception.o OptionException.o PasswordException.o 
 		g++ Test5.cpp Voiture.o Modele.o Option.o Personne.o Client.o Intervenant.o Employe.o Exception.o OptionException.o PasswordException.o  -o Test5
+
+Test6:	Test6.cpp Vecteur.o Client.o Intervenant.o Personne.o Iterateur.o
+		g++ Test6.cpp Vecteur.o Client.o Intervenant.o Personne.o Iterateur.o -o Test6
+
+Test7:		Test7.cpp Voiture.o Modele.o Option.o OptionException.o Exception.o
+			g++ Test7.cpp Voiture.o Option.o Modele.o OptionException.o Exception.o -o Test7
+
+Test8a:	Test8a.cpp Garage.o Modele.o Option.o Personne.o Client.o Intervenant.o Employe.o Iterateur.o Vecteur.o Exception.o OptionException.o PasswordException.o 
+		g++ Test8a.cpp Garage.o Modele.o Option.o Personne.o Client.o Intervenant.o Employe.o Iterateur.o Vecteur.o Exception.o OptionException.o PasswordException.o  -o Test8a
 
 Modele.o:	Modele.cpp Modele.h
 			g++ Modele.cpp -c
@@ -58,6 +67,19 @@ OptionException.o:	OptionException.cpp OptionException.h
 PasswordException.o:	PasswordException.cpp PasswordException.h
 						g++ PasswordException.cpp -c
 
+
+Vecteur.o:	Vecteur.cpp Vecteur.h
+			g++ Vecteur.cpp -c
+
+
+Iterateur.o:	Iterateur.cpp Iterateur.h
+				g++ Iterateur.cpp -c
+
+VecteurTrie.o:	VecteurTrie.cpp VecteurTrie.h
+			g++ VecteurTrie.cpp -c
+
+Garage.o:	Garage.cpp Garage.h
+			g++ Garage.cpp -c
 clean :
 			rm -f *.o
 

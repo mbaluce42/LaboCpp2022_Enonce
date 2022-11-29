@@ -20,7 +20,7 @@ public:
 	Client();
 
 	/* contructeur d'initialisation | parametre*/
-	Client(const string n, const string pren,const int num, const string phone);
+	Client(const string n, const string pren/*,const int num*/, const string phone);
 
 	/*Constructeur de copie*/
 	Client(const Client &cli);

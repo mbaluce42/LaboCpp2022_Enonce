@@ -1,5 +1,5 @@
 #include "OptionException.h"
-//#define DEBUG
+#define DEBUG
 
 
 
